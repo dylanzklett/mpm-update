@@ -4,6 +4,26 @@
 
   = render 'shared/form_errors', obj: project
   %br
+  / Added form field for project name:
+  .form-group
+    = label_tag 'name', 'Project Name', class: 'control-label'
+    .controls
+      = f.text_field :name , :size => "147", :style => "text-align: Left"
+  /First added form field ends
+
+  / Added form field for project description:
+  .form-group
+    = label_tag 'description_autocomplete', 'Description', class: 'control-label'
+    .controls
+      = f.text_field :description, :size => "147", :style => "text-align: Left"
+    /Second added form field ends
+
+    / Third added form field for project proposal number:
+  .form-group
+    = label_tag 'proposal_number_autocomplete', 'Proposal Number', class: 'control-label'
+    .controls
+      = f.text_field :proposal_number, :size => "147", :style => "text-align: Left"
+    / Third added form field ends
   .form-group
     = label_tag 'customer_autocomplete', 'Customer', class: 'control-label'
     .controls
@@ -27,9 +47,3 @@
     %br
 
   = render 'curtains', project: project unless project.new_record?
-
-  %h3 Support Items
-  .fields
-    = f.fields_for :items do |item_f|
-      = render 'item_fields', f: item_f
-    = link_to_add_fields "Add Item", f, :items, 'App.Methods.Items.add_fields'

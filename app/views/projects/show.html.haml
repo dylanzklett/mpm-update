@@ -4,6 +4,15 @@
     = project.versioned_name
     - if project.versions.any?
       = link_to "(#{pluralize(project.versions.size, 'version')})", project_versions_path(project), style: 'font-size:14px;'
+  %h3
+    / Added Project Name
+    Project Name:
+    = project.name
+    /End Add Project Name
+  %h3
+    / Added Project Proposal Number
+    Proposal Number:
+    = project.proposal_number
 
 .actions
   = link_to t('.back', :default => t("helpers.links.back")), projects_path, :class => 'btn btn-default'
@@ -31,6 +40,11 @@
 %div.state
   %strong Status:
   = project.state
+/ Add Project Description below
+%div
+  %strong Project Description:
+  = project.description
+/ End project description
 %div
   %strong Product Subtotal:
   = number_to_currency(project.curtains_price, unit: '$')

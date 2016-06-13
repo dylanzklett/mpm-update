@@ -195,8 +195,6 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    puma (2.11.1)
-      rack (>= 1.1, < 2.0)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.0)
@@ -372,7 +370,6 @@ DEPENDENCIES
   poltergeist
   prawn
   pry
-  puma
   quiet_assets
   rails (= 4.2.0)
   rails_12factor
@@ -396,3 +393,6 @@ DEPENDENCIES
   unicorn
   web-console (~> 2.0)
   whenever
+
+BUNDLED WITH
+   1.11.2
