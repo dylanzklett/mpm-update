@@ -44,6 +44,7 @@ class Project < ActiveRecord::Base
   aasm column: :state do
     state :quotes,  initial: true
     state :proposals, after_enter: :create_init_version
+    state :names
     state :orders, enter: :set_date
     state :in_process
     state :closed
