@@ -1,0 +1,7 @@
+= render 'shared/email_form', form_url: project_email_path(project), |
+                              cancel_url: project_path(project),     |
+                              email_params: {                        |
+                                to:      project.customer_email,     |
+                                content: content,                    |
+                                subject: 'New Proposal'              |
+                              }                                      |

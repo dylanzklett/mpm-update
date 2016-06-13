@@ -1,0 +1,11 @@
+= form_for [inventory_item, item], html: { class: "form form-horizontal inventory-item" } do |f|
+
+  = f.submit 'Change inventory', class: 'btn btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), manufacturer_path(inventory_item.manufacturer), :class => 'btn btn-default'
+
+  = render 'shared/form_errors', obj: item
+  = f.hidden_field :event
+  .form-group
+    = f.label :amount, class: 'control-label'
+    .controls
+      = f.text_field :amount, class: 'form-control'

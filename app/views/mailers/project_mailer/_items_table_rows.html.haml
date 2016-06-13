@@ -1,0 +1,14 @@
+- project.items.each_with_index do |item, index|
+  %tr
+    %td= start_index + index +1
+    %td{ colspan: 5 }
+      = item.name
+    %td.centered= item.unit
+    %td.right-sided= number_to_currency(item.price, unit: '$')
+    %td.right-sided= number_to_currency(item.full_price, unit: '$')
+%tr
+  %td= start_index + project.items.size + 1
+  %td{ colspan: 7 }
+    %strong Sub-total for Support Items
+  %td.right-sided
+    %strong= number_to_currency(project.items_price, unit: '$')

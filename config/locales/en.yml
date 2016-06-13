@@ -1,0 +1,33 @@
+en:
+  date:
+    formats:
+      default: ! '%m/%d/%Y'
+      short: ! '%m/%d/%Y'
+      long: ! '%m/%d/%Y'
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M"
+      short: ! '%m/%d/%Y'
+      date_time: ! '%m/%d/%Y %k:%M'
+  titles:
+    users: 'Users'
+  nav:
+    projects: 'Projects'
+    users:  'Users'
+    customers: 'Customers'
+    manufacturers: 'Manufacturers'
+    tasks: 'Outsourced tasks'
+    admin_area: 'Admins area'
+    settings: 'Settings'
+    logout: 'Logout'
+    brand:  'MPM III'
+  settings:
+    fabric_color: 'Fabric Color'
+    trough_color: 'Trough Color'
+    center_support: 'Center Support'
+    end_bracket: 'End Bracket'
+    width_multiplicity: 'Multiplicity of width'
+    multiplicity_items: 'Multiplicity items list:'
+    price_matrix: 'Prices:'
+    trough_step: 'Trough step:'
+    trough_matrix: 'Trough matrix:'

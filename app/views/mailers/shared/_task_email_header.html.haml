@@ -1,0 +1,37 @@
+%table{align: :center}
+  %tr
+    %td{valign: :top, width: 200 }
+      %img.miti-tech-logo{ width: 250, height: 50, src: image_url('MitiTechLogo.png')}
+      %div.contacts
+        Phone: 410-309-9447 Fax: 410-309-9446
+    %td{valign: :top, width: 300}
+    %td{valign: :top, width: 300, align: :left}
+      %div{style: 'font-size: 25px; text-align: right;'}
+        = task.worksheet_name
+        = l(task.mitech_rec_date, format: :short) if task.mitech_rec_date
+  %tr
+    %td{valign: :top}
+    %td{valign: :top}
+      %div
+        %strong MPM:
+        = task.project_versioned_name
+      %div
+        %strong Manufacturer:
+        = task.manufacturer_title
+      %div
+        %strong PO num:
+        = task.mitech_po
+      %div
+        %strong Ship via:
+        = task.ship_via
+      %div
+        %strong Date required:
+        = l(task.date_wanted, format: :short) if task.date_wanted
+    %td{valign: :top}
+      %strong Ship to:
+      = task.ship_to
+  %tr
+    %td{valign: :top}
+    %td{valign: :top, colspan: 2}
+      %strong Special Instructions:
+      = task.instructions

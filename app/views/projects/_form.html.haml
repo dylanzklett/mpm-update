@@ -1,0 +1,35 @@
+= form_for project, html: { class: "form form-horizontal project" } do |f|
+  = f.submit nil,class: 'btn btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), (project.new_record? ? projects_path : project_path(project)), :class => 'btn btn-default'
+
+  = render 'shared/form_errors', obj: project
+  %br
+  .form-group
+    = label_tag 'customer_autocomplete', 'Customer', class: 'control-label'
+    .controls
+      = text_field_tag 'customer_autocomplete', project.customer_name_for_select, class: 'form-control customer-autocomplete', autocomplete: :off
+      = f.hidden_field :customer_id
+  .form-group
+    = label_tag 'sales_autocomplete', 'Sales', class: 'control-label'
+    .controls
+      = text_field_tag 'sales_autocomplete', project.sales_name_for_select, class: 'form-control sales-autocomplete', autocomplete: :off
+      = f.hidden_field :sales_id
+  .form-group
+    = f.label :discount, class: 'control-label'
+    .controls
+      = f.text_field :discount, class: 'form-control'
+  = project.extra_inputs(f)
+  - if project.price_editable?
+    .form-group
+      = f.label 'Calculated price', class: 'control-label'
+      .controls
+        = project.calculated_price.round(2)
+    %br
+
+  = render 'curtains', project: project unless project.new_record?
+
+  %h3 Support Items
+  .fields
+    = f.fields_for :items do |item_f|
+      = render 'item_fields', f: item_f
+    = link_to_add_fields "Add Item", f, :items, 'App.Methods.Items.add_fields'

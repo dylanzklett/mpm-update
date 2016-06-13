@@ -1,0 +1,45 @@
+.col-sm-12
+  .actions
+    - if task.project
+      = link_to t('.back', :default => t("helpers.links.back")), project_path(task.project), :class => 'btn btn-default'
+      = link_to t('.edit', :default => t("helpers.links.edit")), url_for([:edit, task.project, task]), :class => 'btn btn-default'
+      = link_to 'Manage task items', edit_task_task_items_path(task), :class => 'btn btn-default'
+      = link_to 'Manage inventory items', edit_task_support_items_path(task), :class => 'btn btn-danger', :data => { :confirm => 'Are you sure you want to change the auto generated values? If the task is updated your changes will be lost.' }
+    - else
+      = link_to t('.back', :default => t("helpers.links.back")), tasks_path, :class => 'btn btn-default'
+      = link_to t('.edit', :default => t("helpers.links.edit")), edit_task_path(task), :class => 'btn btn-default'
+
+    = link_to t('.destroy', :default => t("helpers.links.destroy")), task_path(task), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '  Are you sure?')) }, :class => 'btn btn-danger'
+
+.col-sm-12
+  %br
+  - if task.project
+    .possible_actions
+      = link_to 'Prepare Email', new_task_email_path(task), class: 'btn btn-warning'
+      = link_to 'Labels', new_task_label_path(task), target: '_blank', class: 'btn btn-warning'
+      - if task.is_a?(DrapeTask)
+        = link_to 'SewLabels', new_task_sew_label_path(task), target: '_blank', class: 'btn btn-warning'
+  %hr
+= render 'task_info', task: task
+%br
+.col-sm-12
+  %strong Line items:
+.col-sm-12
+  = render "task_items", items: task.task_items
+.col-sm-6
+  %table.table.table-striped.table-bordered
+    %tr
+      %td
+        %strong Name:
+      %td
+        %strong Unit:
+      %td
+        %strong Qty:
+      %td
+        %strong Current Balance:
+    - task.support_items.each do |item|
+      %tr
+        %td=item.name
+        %td=item.unit
+        %td=item.quantity
+        %td= item.inventory_history_item.inventory_item.balance if item.inventory_history_item

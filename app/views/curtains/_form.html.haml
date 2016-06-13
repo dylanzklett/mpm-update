@@ -1,0 +1,53 @@
+= form_for [project, curtain], html: { class: "form form-horizontal curtain" } do |f|
+  = f.submit nil,class: 'btn btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), project_path(project), :class => 'btn btn-default'
+
+  = render 'shared/form_errors', obj: curtain
+  .form-group
+    = f.label :metric, 'Metric system', class: 'control-label'
+    .controls
+      = f.select :metric, options_for_select(Curtain::METRICS, selected: f.object.metric), {}, {class: 'form-control'}
+  .form-group
+    = f.label :building_number, class: 'control-label'
+    .controls
+      = f.text_field :building_number, class: 'form-control'
+  .form-group
+    = f.label :room, class: 'control-label'
+    .controls
+      = f.text_field :room, class: 'form-control'
+  .form-group
+    = f.label :width, class: 'control-label'
+    .controls
+      = f.text_field :width, value: curtain.metric == 'Imperial' ? curtain.width_in('in') : curtain.width_in('cm'), class: 'form-control'
+  .form-group
+    = f.label :height, class: 'control-label'
+    .controls
+      = f.text_field :height, value: curtain.metric == 'Imperial' ? curtain.height_in('in') : curtain.height_in('cm'), class: 'form-control'
+  .form-group
+    = f.label :inside, 'Inside/Outside', class: 'control-label'
+    .controls
+      = f.select :inside, options_for_select([['Inside', true],['Outside', false]], selected: f.object.inside), {}, {class: 'form-control'}
+  .form-group
+    = f.label :wall_type, class: 'control-label'
+    .controls
+      = f.text_field :wall_type, class: 'form-control'
+  .form-group
+    = f.label :fabric_color, class: 'control-label'
+    .controls
+      = f.select :fabric_color, Setting.fabric_color , {}, { class: 'form-control' }
+  .form-group
+    = f.label :trough_color, class: 'control-label'
+    .controls
+      = f.select :trough_color, Setting.trough_color , {}, { class: 'form-control' }
+  .form-group
+    = f.label :center_support, class: 'control-label'
+    .controls
+      = f.select :center_support, Setting.center_support , {}, { class: 'form-control' }
+  .form-group
+    = f.label :end_bracket, class: 'control-label'
+    .controls
+      = f.select :end_bracket, Setting.end_bracket , {}, { class: 'form-control' }
+  .form-group
+    = f.label :quantity, class: 'control-label'
+    .controls
+      = f.text_field :quantity, class: 'form-control'

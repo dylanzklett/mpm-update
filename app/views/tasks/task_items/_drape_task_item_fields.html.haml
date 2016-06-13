@@ -1,0 +1,9 @@
+%tr.fields
+  %td= f.text_field :quantity
+  %td= f.text_field :width_per_curt
+  %td= f.text_field :finished_length_in, value: f.object.convert(:finished_length, 'in')
+  %td= f.text_field :pattern_color
+  %td= f.text_field :room
+  %td= f.text_field :width_in, value: f.object.convert(:width, 'in')
+  %td= f.text_field :height_in, value: f.object.convert(:height, 'in')
+  %td= link_to_remove_fields('remove', f, 'App.Methods.Items.remove_fields')

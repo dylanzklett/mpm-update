@@ -1,0 +1,25 @@
+= render 'shared/task_email_header', task: @task
+= render '../tasks/drape_tasks/task_items', items: @task.task_items
+
+%table.worksheet_summary.drape{align: :center}
+  %tr
+    %td
+      %strong Total widths:
+      = @task.full_width_count
+    %td
+      %strong Cost per:
+      = number_to_currency(@task.price_for_width, unit: '$')
+    %td
+      %strong Total PO:
+      = number_to_currency(@task.full_price, unit: '$')
+%br
+%table.worksheet_inventory_summary.drape{align: :center}
+  %tr
+    %td &nbsp;
+    %td
+      %strong unit
+    %td
+      %strong Qty
+    %td
+      %strong Balance
+  = render partial: 'support_item_row', collection: @task.support_items, as: :item

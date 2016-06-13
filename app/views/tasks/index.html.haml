@@ -1,0 +1,21 @@
+- model_class = Task
+.page-header
+  %h1
+    =t '.title', :default => model_class.model_name.human.pluralize.titleize
+    = link_to t('.new', :default => t("helpers.links.new")), new_task_path, :class => 'btn btn-primary'
+
+
+%table.table.table-striped.related-tasks
+  %thead
+    %tr
+      %th= sortable 'manufacturer_id', 'Manufacturer'
+      %th= sortable 'type', 'Type'
+      %th= sortable 'project_id', 'Project'
+      %th= sortable 'mitech_po', 'Purchase Order'
+      %th= sortable 'date_wanted', 'Date wanted'
+      %th= sortable 'mitech_rec_date', 'MitiTech Order Date'
+      %th= sortable 'status', 'Status'
+      %th=t '.actions', :default => t("helpers.actions")
+  = render 'tasks_table', tasks: tasks
+= page_entries_info tasks
+= paginate tasks

@@ -1,0 +1,61 @@
+= form_for base, html: { class: "form form-horizontal task" } do |f|
+  .col-sm-12
+    = f.submit nil,class: 'btn btn-primary'
+    - if f.object.project
+      = link_to t('.cancel', :default => t("helpers.links.cancel")), project_path(f.object.project), :class => 'btn btn-default'
+    - else
+      = link_to t('.cancel', :default => t("helpers.links.cancel")), tasks_path, :class => 'btn btn-default'
+    = render 'shared/form_errors', obj: f.object
+
+  .col-sm-3
+    .form-group
+      = f.label :manufacturer_id, class: 'control-label'
+      .controls
+        = f.select :manufacturer_id, options_for_select(manufacturers_for_select, f.object.manufacturer_id), {}, { class: 'form-control' }
+    .form-group
+      = f.label :ship_via, class: 'control-label'
+      .controls
+        = f.text_field :ship_via, class: 'form-control'
+  .col-sm-3
+    .form-group
+      = f.label :ship_to, class: 'control-label'
+      .controls
+        = f.text_area :ship_to, rows: 5,  class: 'form-control'
+  .clearfix
+  .col-sm-3
+    .form-group
+      = f.label :date_wanted, class: 'control-label'
+      .controls
+        = f.date_field :date_wanted, class: 'form-control'
+  .col-sm-3
+    .form-group
+      = f.label :instructions, 'Special instructions', class: 'control-label'
+      .controls
+        = f.text_area :instructions, rows: 5,  class: 'form-control'
+  .clearfix
+  %hr
+  .col-sm-3
+    .form-group
+      = f.label :mitech_po, class: 'control-label'
+      .controls
+        = f.text_field :mitech_po, class: 'form-control'
+    .form-group
+      = f.label :customer_po, class: 'control-label'
+      .controls
+        = f.text_field :customer_po, class: 'form-control'
+  .col-sm-3
+    .form-group
+      = f.label :mitech_rec_date, 'MitiTech Order Date', class: 'control-label'
+      .controls
+        = f.date_field :mitech_rec_date, value: Date.current, class: 'form-control'
+    .form-group
+      = f.label :pref_ship_method, class: 'control-label'
+      .controls
+        = f.text_field :pref_ship_method, class: 'form-control'
+  .clearfix
+  .col-sm-6
+    .form-group
+      = f.label :status, class: 'control-label'
+      .controls
+        = f.select :status, Task::STATUSES, { }, {class: 'form-control'}
+  .clearfix

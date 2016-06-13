@@ -1,0 +1,93 @@
+.page-header
+  %h1
+    Project version
+    = version.name
+.actions
+  = link_to t('.back', :default => t("helpers.links.back")), project_versions_path(project), :class => 'btn btn-default'
+  = link_to "Restore", project_version_restore_path(version.project_id, version), method: :post, class: 'btn btn-warning'
+%br
+
+%div
+  %strong Customer:
+  = find_version_customer_name(project_version['customer_id']) if project_version['customer_id']
+- if project_version['customer_number']
+  %div
+    %strong Customer number:
+    = project_version['customer_number']
+%div
+  %strong Sales:
+  = find_version_sales_name(project_version['sales_id']) if project_version['sales_id']
+- if project_version['sales_number']
+  %div
+    %strong Sales number:
+    = project_version['sales_number']
+%div
+  %strong Status:
+  = project_version['state']
+%div
+  %strong Product Subtotal:
+  = number_to_currency(project_version['curtains'].map{|curtain| curtain['price'].to_f * curtain['quantity'].to_f }.sum, unit: '$')
+- if project_version['discount'].present?
+  %div
+    %strong Discount on Product:
+    = project_version['discount']
+    \%
+%div:
+  %strong Support Items Subtotal:
+  = number_to_currency(project_version['items'].map{|item| item['price'].to_f * item['quantity'].to_f }.sum, unit: '$')
+%div
+  %strong Proposal Project Total:
+  = number_to_currency(project_version['price'], unit: '$')
+
+%div
+  %h2
+    Curtains:
+  %table.table.table-striped.curtains
+    %thead
+      %tr
+        %th= Curtain.human_attribute_name(:building_number)
+        %th= Curtain.human_attribute_name(:room)
+        %th= Curtain.human_attribute_name(:width)
+        %th= Curtain.human_attribute_name(:height)
+        %th= Curtain.human_attribute_name(:inside)
+        %th= Curtain.human_attribute_name(:wall_type)
+        %th= Curtain.human_attribute_name(:fabric_color)
+        %th= Curtain.human_attribute_name(:trough_color)
+        %th= Curtain.human_attribute_name(:center_support)
+        %th= Curtain.human_attribute_name(:end_bracket)
+        %th= Curtain.human_attribute_name(:quantity)
+        %th Item Price
+        %th Extended Price
+    %body
+      = render partial: 'curtain', collection: project_version['curtains']
+      %tr
+        %th{colspan: 11}
+        %th Sub total
+        %th= number_to_currency(project_version['curtains'].map{|curtain| curtain['price'].to_f * curtain['quantity'].to_f }.sum, unit: '$')
+        %th &nbsp;
+
+%div
+  %h3 Support items
+  %table.table.table-striped.support-items
+    %tr
+      %th Name:
+      %th Unit
+      %th Quantity:
+      %th Item Price:
+      %th Extended Price:
+    - if project_version['items'].select{|item| item['auto_create'] }.any?
+      %tr
+        %td{colspan: 5, align: :center}
+          %strong Auto populated support items
+      = render partial: 'item', collection: project_version['items'].select{|item| item['auto_create'] }
+    - if project_version['items'].select{|item| !item['auto_create'] }.any?
+      %tr
+        %td{colspan: 5, align: :center}
+          %strong Manual support items
+      = render partial: 'item', collection: project_version['items'].select{|item| !item['auto_create'] }
+    - if project_version['items'].any?
+      %tr
+        %th{colspan: 2}
+        %th Sub Total
+        %th= number_to_currency(project_version['items'].map{|item| item['price'].to_f * item['quantity'].to_f }.sum, unit: '$')
+        %th &nbsp;

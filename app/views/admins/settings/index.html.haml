@@ -1,0 +1,65 @@
+- model_class = Setting
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+- inline_settings.each do |inline_settings|
+  .row
+    .col-sm-2= t("settings.#{inline_settings.code}")
+    .col-sm-4= render 'form', setting: inline_settings
+  %br
+.row
+  .col-sm-12= t("settings.#{Setting.multiplicity_items.code}")
+  .col-sm-12
+    = form_for Setting.multiplicity_items, html: { class: "form form-inline setting" } do |f|
+      .fields
+        = f.fields_for :items do |item_f|
+          = render 'item_fields', f: item_f
+        = link_to_add_fields "Add Item", f, :items, 'App.Methods.Items.add_fields'
+      = f.submit 'update',class: 'btn btn-primary'
+.row
+  %br
+  .col-sm-12= t("settings.#{Setting.price_matrix.code}")
+  .col-sm-12.price-matrix
+    = form_for Setting.price_matrix, html: { class: "form form-inline setting" } do |f|
+      %div
+        %span.price-matrix-cell
+        - 9.times do |col|
+          %span.price-matrix-cell
+            up to
+            = ((col + 1 ) * Setting.get_by('width_multiplicity').convert_to('in')).round(2)
+            in
+      - 10.times do |row|
+        %div
+          %span.price-matrix-cell
+            up to
+            = ((row + 1 ) * Setting.get_by('width_multiplicity').convert_to('in')).round(2)
+            in
+          - 9.times do |col|
+            %span.price-matrix-cell
+              = text_field_tag "setting[value][#{row+1},#{col+1}]", JSON.parse(Setting.price_matrix.value)["#{row+1},#{col+1}"].to_s, class: 'price-matrix-cell'
+              %div{style: 'font-size:10px;text-align:center;'}
+                = %Q{SDCW#{((col + 1 ) * Setting.get_by('width_multiplicity').convert_to('in')).to_i}#{((row + 1 ) * Setting.get_by('width_multiplicity').convert_to('in')).to_i}}
+      = f.submit 'update',class: 'btn btn-primary'
+.row
+  %br
+  .col-sm-12= t("settings.#{Setting.trough_matrix.code}")
+  .col-sm-12.trough-matrix
+    = form_for Setting.trough_matrix, html: { class: "form form-inline setting" } do |f|
+      %div
+        %span.trough-matrix-cell
+        - 6.times do |col|
+          %span.trough-matrix-cell
+            up to
+            = Setting.trough_step.split(',')[col].strip.to_f
+            in
+      - 10.times do |row|
+        %div
+          %span.trough-matrix-cell
+            up to
+            = ((row + 1 ) * Setting.get_by('width_multiplicity').convert_to('in')).round(2)
+            in
+          - 6.times do |col|
+            %span.trough-matrix-cell
+              = text_field_tag "setting[value][#{row+1},#{col+1}]", JSON.parse(Setting.trough_matrix.value)["#{row+1},#{col+1}"].to_s, class: 'trough-matrix-cell'
+      = f.submit 'update',class: 'btn btn-primary'
+
+

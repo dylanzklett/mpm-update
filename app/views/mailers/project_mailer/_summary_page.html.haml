@@ -1,0 +1,61 @@
+%table{ align: :center}
+  %tr
+    %td{valign: :top}
+      %span.red TO:
+    %td{valign: :top}
+      = @project.customer_address_for_email
+    %td{valign: :top}
+      %span.red FROM:
+    %td{valign: :top}
+      = @project.sales_address_for_email
+%br
+%table{ align: :center}
+  %tr
+    %td
+      %span.red DATE
+      = Date.current.strftime('%A, %B %d, %Y')
+  %tr
+    %td
+      %br
+      %span.red PROPOSAL NO.
+      = @project.versioned_name
+%table{ align: :center}
+  %tr
+    %td
+      = "Dear #{@project.customer_first_name},"
+      %p{style: 'text-indent: 50px;'}
+        Thank you for the opportunity to present this proposal to provide glass hazard mitigation. Safetydrape® is the only glass hazard mitigation blast curtain system that has been tested under various blast loads. Our patented system is the only blast curtain approved by the DHS under the SAFETY Act.
+  %tr
+    %td.red{align: :center}
+      APPLICABLE STANDARDS & PERFORMANCE ATTRIBUTES
+  %tr
+    %td
+      %ul
+        %li
+          ASTM F1642 Standard Test Method for Glazing and Glazing Systems Subject to Airblast Loadings
+          %ul
+            %li Glazing hazard level: LH
+        %li
+          GSA Standard Test Method for Glazing and Window Systems Subject to Dynamic Overpressure Loadings
+          %ul
+            %li Rating: 3
+        %li AAMA 510-06 Voluntary Guide specification for Blast Hazard Mitigation for Fenestration Systems
+        %li ASTM E1300-04, Standard Practice for Determining Load Resistance of Glass in Buildings
+        %li ISO 16933:2007 Glass in building - Explosion resistant security glazing - Test and classification for arena air blast loading
+        %li ISO 16934:2007 Glass in building - Explosion resistant security glazing - Test and classification by shock tube loading
+        %li UFC 4-010-01 DOD Minimum Antiterrorism Standards for Buildings
+  %tr
+    %td
+      %p{style: 'text-indent: 50px;'}
+        Mitigation Technologies is the exclusive manufacturer and patent holder for Safetydrape® blast curtains. All components are factory original parts, and are recyclable. Our blast curtains ship as a complete life-saving system, including all components and hardware required for installation.
+      %p{style: 'text-indent: 50px;'}
+        Safetydrape is now on the 'Approved Product List for Homeland Security' pursuant to 6 U.S.C. 442(d)(3) (The Support Anti-Terrorism by Fostering  Effective Technologies Act of 2002, or 'SAFETY Act') and 6 C.F.R. 25.7(j)(2004) (Regulations to Support Anti-Terrorism by Fostering Effective Technologies) / www.safetyact.gov.  Visit www.mitigationtechnologies.com to help further evaluate the products capabilities.
+  %tr
+    %td
+      Sincerely,
+  %tr
+    %td
+      = @project.sales_full_name
+      %br
+      = @project.sales_first_title
+

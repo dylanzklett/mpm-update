@@ -1,0 +1,35 @@
+.col-sm-12
+  .col-sm-3
+    %strong Manufacturer:
+    = task.manufacturer_title if task.manufacturer
+    %br
+    %strong Ship via:
+    = task.ship_via
+  .col-sm-3
+    %strong Ship to:
+    = task.ship_to
+.col-sm-12
+  .col-sm-3
+    %strong Date wanted:
+    = l(task.date_wanted, format: :short) if task.date_wanted
+  .col-sm-3
+    %strong Special instructions:
+    = task.instructions
+  %hr
+.col-sm-12
+  .col-sm-3
+    %strong MitiTech PO:
+    = task.mitech_po
+    %br
+    %strong Customer PO:
+    = task.customer_po
+  .col-sm-3
+    %strong MitiTech Order Date
+    = l(task.mitech_rec_date, format: :short) if task.mitech_rec_date
+    %br
+    %strong Pref ship method
+    = task.pref_ship_method
+.col-sm-12
+  %strong Status
+  = task.status
+  %hr

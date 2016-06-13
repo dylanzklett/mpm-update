@@ -1,0 +1,29 @@
+%div
+  %h2
+    Curtains
+    - if project.editable?
+      = link_to  'Add curtain', new_project_curtain_path(project), :class => 'btn btn-default'
+  %table.table.table-striped.curtains
+    %thead
+      %tr
+        %th= Curtain.human_attribute_name(:building_number)
+        %th= Curtain.human_attribute_name(:room)
+        %th= Curtain.human_attribute_name(:width)
+        %th= Curtain.human_attribute_name(:height)
+        %th= Curtain.human_attribute_name(:inside)
+        %th= Curtain.human_attribute_name(:wall_type)
+        %th= Curtain.human_attribute_name(:fabric_color)
+        %th= Curtain.human_attribute_name(:trough_color)
+        %th= Curtain.human_attribute_name(:center_support)
+        %th= Curtain.human_attribute_name(:end_bracket)
+        %th= Curtain.human_attribute_name(:quantity)
+        %th Item Price
+        %th Extended Price
+        %th=t '.actions', :default => t("helpers.actions")
+    %body
+      = render project.curtains
+      %tr
+        %th{colspan: 11}
+        %th Sub total
+        %th= number_to_currency(project.curtains_price, unit: '$')
+        %th &nbsp;

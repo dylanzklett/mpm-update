@@ -1,0 +1,32 @@
+= render 'shared/task_email_header', task: @task
+= render '../tasks/trough_tasks/task_items', items: @task.task_items
+
+%table.worksheet_summary.trough{align: :center}
+  %tr
+    %td
+    %td
+    %td{align: :left}
+      %strong Unit
+    %td
+  - @task.summary_items.each do | _, item |
+    %tr
+      %td= item[:name]
+      %td= item[:quantity]
+      %td= number_to_currency(item[:price_per], unit: '$')
+      %td= number_to_currency(item[:price_total], unit: '$')
+  %tr
+    %td
+    %td
+    %td
+      %strong Total:
+    %td= number_to_currency(@task.full_price, unit: '$')
+
+%br
+%table.worksheet_inventory_summary.trough{align: :center}
+  %tr
+    %td &nbsp;
+    %td
+      %strong unit
+    %td
+      %strong Qty
+  = render partial: 'support_item_row', collection: @task.support_items, as: :item

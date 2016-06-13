@@ -1,0 +1,14 @@
+= render 'tasks/task_info', task: task
+
+= form_for task do |f|
+  .actions
+    = f.submit 'Update Task items List',class: 'btn btn-primary'
+    = link_to 'Back', url_for([task.project, task]), :class => 'btn btn-default'
+    %br
+    %br
+  %table.manage-task-items
+    = render "#{task.task_items_partial_name}_header"
+    = f.fields_for task.task_type do |task_item_f|
+      = render "#{task.task_items_partial_name}_fields", f: task_item_f
+    %tr
+      %td= link_to_add_fields "Add Item", f, task.task_type, 'App.Methods.TaskItems.add_fields'

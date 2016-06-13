@@ -1,0 +1,26 @@
+= link_to t('.back', :default => t("helpers.links.back")), project_path(project), :class => 'btn btn-default'
+%h2 Previous Versions
+%table.table
+  %thead
+    %tr
+      %th ID
+      %th Price after
+      %th Price before
+      %th Create date
+      %th Author
+      %th Event
+  %tbody
+    - versions.reverse.each do |version|
+      %tr
+        %td= link_to version.name, project_version_path(project, version)
+        %td
+          - if version.object_changes
+            = number_to_currency(version.object_changes['price'].second, unit: '$')
+          - else
+            = number_to_currency(version.object['price'], unit: '$')
+        %td
+          - if version.object_changes
+            = number_to_currency(version.object_changes['price'].first, unit: '$')
+        %td= l(version.created_at, format: :date_time)
+        %td= find_version_author_name(version)
+        %td= version.event.humanize

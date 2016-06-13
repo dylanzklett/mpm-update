@@ -1,0 +1,33 @@
+- model_class = Manufacturer
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.titleize
+
+%p
+  %strong= model_class.human_attribute_name(:title) + ':'
+  %br
+  = manufacturer.title
+%p
+  %strong= model_class.human_attribute_name(:manufacturer_type) + ':'
+  %br
+  = manufacturer.get_type
+%p
+  %strong= model_class.human_attribute_name(:email) + ':'
+  %br
+  = manufacturer.email
+%p
+  %strong= model_class.human_attribute_name(:phone) + ':'
+  %br
+  = manufacturer.phone
+%p
+  %strong= model_class.human_attribute_name(:address) + ':'
+  %br
+  = manufacturer.address
+
+= render 'inventory', items: manufacturer.inventory_items
+
+= render 'services', services: manufacturer.services
+
+
+= link_to t('.back', :default => t("helpers.links.back")), manufacturers_path, :class => 'btn btn-default'
+= link_to t('.edit', :default => t("helpers.links.edit")), edit_manufacturer_path(manufacturer), :class => 'btn btn-default'
+= link_to t('.destroy', :default => t("helpers.links.destroy")), manufacturer_path(manufacturer), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

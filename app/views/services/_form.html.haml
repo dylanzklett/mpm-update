@@ -1,0 +1,13 @@
+= form_for [service.manufacturer, service], html: { class: "form form-horizontal service" } do |f|
+  = render 'shared/form_errors', obj: service
+  .form-group
+    = f.label :name, class: 'control-label'
+    .controls
+      = f.text_field :name, class: 'form-control', required: true
+  .form-group
+    = f.label :price, class: 'control-label'
+    .controls
+      = f.text_field :price, value: service.price, class: 'form-control', required: true
+
+  = f.submit nil, class: 'btn btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), manufacturer_path(service.manufacturer), :class => 'btn btn-default'

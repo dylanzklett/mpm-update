@@ -1,0 +1,20 @@
+%table.table.table-striped.table-bordered.items-table{align: :center}
+  %tr
+    %th.number-column{rowspan: 2} #
+    %th{rowspan: 2} Qty
+    %th{rowspan: 2} Trough size
+    %th{rowspan: 2} Trough color
+    %th{colspan: 3} Mark packages with the following
+  %tr
+    %th Room
+    %th Width
+    %th Length
+  - items.each_with_index do |item, index|
+    %tr
+      %td= index + 1
+      %td= item.quantity
+      %td= item.trough_size
+      %td= item.trough_color
+      %td= item.room
+      %td= item.convert(:width, 'in')
+      %td= item.convert(:height, 'in')

@@ -1,0 +1,35 @@
+.page-header
+  %h1
+    Projects
+    = link_to t('.new', :default => t("helpers.links.new")), new_project_path, :class => 'btn btn-primary'
+  %br
+  %hr
+  = form_tag(searches_path, method: :get, class: 'form-inline') do
+    .form-group
+      = label_tag(:term, "Search for:", class: 'control-label')
+      = text_field_tag(:term, term, class: 'form-control')
+    = submit_tag "Search", class: 'btn btn-primary'
+
+%div{:role => "tabpanel"}
+  / Nav tabs
+  %ul.nav.nav-tabs{:role => "tablist"}
+    %li.active{:role => "presentation"}
+      %a{"aria-controls" => "quotes", "data-toggle" => "tab", :href => "#quotes", :role => "tab"} Quotes
+    %li{:role => "presentation"}
+      %a{"aria-controls" => "proposals", "data-toggle" => "tab", :href => "#proposals", :role => "tab"} Proposals
+    %li{:role => "presentation"}
+      %a{"aria-controls" => "orders", "data-toggle" => "tab", :href => "#orders", :role => "tab"} Orders
+    %li{:role => "presentation"}
+      %a{"aria-controls" => "in_process", "data-toggle" => "tab", :href => "#in_process", :role => "tab"} In process
+    %li{:role => "presentation"}
+      %a{"aria-controls" => "closed", "data-toggle" => "tab", :href => "#closed", :role => "tab"} Closed
+  / Tab panes
+  .tab-content
+    #quotes.tab-pane.active{:role => "tabpanel"}= render 'project_table', projects: projects.quotes
+    #proposals.tab-pane{:role => "tabpanel"}= render 'project_table', projects: projects.proposals
+    #orders.tab-pane{:role => "tabpanel"}= render 'project_table', projects: projects.orders
+    #in_process.tab-pane{:role => "tabpanel"}= render 'project_table', projects: projects.in_process
+    #closed.tab-pane{:role => "tabpanel"}= render 'project_table', projects: projects.closed
+
+
+

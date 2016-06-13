@@ -1,0 +1,16 @@
+= form_for customer, html: { class: "form form-horizontal customer" } do |f|
+  = f.submit nil,class: 'btn btn-primary'
+  = f.submit 'Create customer and add new project', name: :with_project, class: 'btn btn-primary' if local_assigns[:with_project]
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), customers_path, :class => 'btn btn-default'
+
+  = render 'shared/form_errors', obj: customer
+  .form-group
+    = f.label :email, class: 'control-label'
+    .controls
+      = f.text_field :email, class: 'form-control'
+  = f.fields_for :profile, f.object.profile do |profile_builder|
+    = render 'profiles/profile', f: profile_builder
+  .form-group
+    = f.label :sales_id, class: 'control-label'
+    .controls
+      = f.select :sales_id, options_for_select(sales.map{|s| [s.email, s.id]}, customer.sales_id), {}, {class: 'form-control'}

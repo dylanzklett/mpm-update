@@ -1,0 +1,35 @@
+%h1
+  History
+  = link_to 'Back', manufacturer_path(inventory_item.manufacturer), :class => 'btn btn-default'
+%table.table.table-striped.inventory-history-items
+  %thead
+    %tr
+      %th Date
+      %th User
+      %th additions
+      %th deletions
+      %th Project
+  %tbody
+    - items.each do |item|
+      %tr
+        %td= l(item.created_at, format: :date_time)
+        %td= find_version_author_name(item)
+        - if item.addition?
+          %td= item.amount
+          %td 0.0
+        - else
+          %td 0.0
+          %td= item.amount
+        %td
+          - if item.support_item
+            = link_to "##{item.support_item.task.project_id}", project_path(item.support_item.task.project)
+    %tr
+      %td{colspan: 5}
+        &nbsp;
+    %tr
+      %th{colspan:2}
+        &nbsp;
+      %th Balance
+      %th
+        = inventory_item.balance
+      %th &nbsp;

@@ -1,0 +1,21 @@
+- model_class = Project
+%table.table.table-striped
+  %thead
+    %tr
+      %th Number
+      %th Customer
+      %th Value
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - projects.each do |project|
+      %tr
+        %td= link_to project.versioned_name, project_path(project)
+        %td
+          - if project.customer_email
+            = link_to customer_path(project.customer) do
+              .name= project.customer_full_name
+              .email= project.customer_email
+              .address= project.customer_city_address
+        %td= number_to_currency(project.price, unit: '$')
+        %td
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), project_path(project), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'

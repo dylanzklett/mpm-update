@@ -1,0 +1,60 @@
+- model_class = Customer
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.titleize
+
+= link_to t('.back', :default => t("helpers.links.back")), customers_path, :class => 'btn btn-default'
+= link_to t('.edit', :default => t("helpers.links.edit")), edit_customer_path(customer), :class => 'btn btn-default'
+= link_to t('.destroy', :default => t("helpers.links.destroy")), customer_path(customer), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+
+%div
+  %strong= model_class.human_attribute_name(:email) + ':'
+  = customer.email
+%div
+  %strong= model_class.human_attribute_name(:first_name) + ':'
+  = customer.first_name
+%div
+  %strong= model_class.human_attribute_name(:last_name) + ':'
+  = customer.last_name
+%div
+  %strong Title:
+  = customer.first_title
+%div
+  %strong Company name:
+  = customer.second_title
+%div
+  %strong Address/Base/Location:
+  = customer.first_address
+%div
+  %strong Street Address:
+  = customer.second_address
+%div
+  %strong= model_class.human_attribute_name(:country) + ':'
+  = customer.country
+%div
+  %strong= model_class.human_attribute_name(:city) + ':'
+  = customer.city
+%div
+  %strong= model_class.human_attribute_name(:state) + ':'
+  = customer.state
+%div
+  %strong= model_class.human_attribute_name(:zip) + ':'
+  = customer.zip
+%div
+  %strong Office Phone:
+  = customer.phone_o
+%div
+  %strong Cell Phone:
+  = customer.phone_c
+%div
+  %strong Sales Rep:
+  = customer.sales_email
+  = "(#{customer.sales_rep_number})" if customer.sales_rep_number
+
+%h3
+  Recent projects
+  = form_for Project.new, html: { class: 'inline'} do |f|
+    = f.submit 'add new project',class: 'btn btn-primary'
+    = f.hidden_field :customer_id, value: customer.id
+    = f.hidden_field :sales_id, value: customer.sales_id
+
+= render 'projects/project_table', projects: customer.projects

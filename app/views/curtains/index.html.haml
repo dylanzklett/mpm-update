@@ -1,0 +1,6 @@
+- model_class = Curtain
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+= render 'curtains_table', curtains: curtains
+
+= link_to t('.new', :default => t("helpers.links.new")), new_curtain_path, :class => 'btn btn-primary'

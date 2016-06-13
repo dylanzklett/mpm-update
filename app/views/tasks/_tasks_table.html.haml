@@ -1,0 +1,21 @@
+%tbody
+  - tasks.each do |task|
+    %tr
+      %td= task.manufacturer_title if task.manufacturer
+      %td= task.manufacturer.get_type if task.manufacturer
+      %td= link_to "##{task.project_id}", project_path(task.project) if task.project
+      %td= task.mitech_po
+      %td= l(task.date_wanted, format: :short) if task.date_wanted
+      %td= l(task.mitech_rec_date, format: :short) if task.mitech_rec_date
+      %td
+        - if task.project
+          = link_to task.status, url_for([task.project, task])
+        - else
+          = link_to task.status, url_for(task)
+      %td
+        - if task.project
+          = link_to t('.edit', :default => t("helpers.links.edit")), url_for([:edit, task.project, task]), :class => 'btn btn-default btn-xs'
+        - else
+          = link_to t('.edit', :default => t("helpers.links.edit")), url_for([:edit, task]), :class => 'btn btn-default btn-xs'
+
+        = link_to t('.destroy', :default => t("helpers.links.destroy")), task_path(task), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'

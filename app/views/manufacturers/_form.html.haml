@@ -1,0 +1,25 @@
+= form_for manufacturer, html: { class: "form form-horizontal manufacturer" } do |f|
+  = f.submit nil,class: 'btn btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), manufacturers_path, :class => 'btn btn-default'
+
+  = render 'shared/form_errors', obj: manufacturer
+  .form-group
+    = f.label :title, class: 'control-label'
+    .controls
+      = f.text_field :title, class: 'form-control'
+  .form-group
+    = f.label :manufacturer_type, class: 'control-label'
+    .controls
+      = f.select :manufacturer_type, options_for_select(Manufacturer::MANUFACTURER_TYPES.map{|k,v| [v,k]}, manufacturer.manufacturer_type.to_sym), {}, class: 'form-control'
+  .form-group
+    = f.label :email, class: 'control-label'
+    .controls
+      = f.text_field :email, class: 'form-control'
+  .form-group
+    = f.label :phone, class: 'control-label'
+    .controls
+      = f.text_field :phone, class: 'form-control'
+  .form-group
+    = f.label :address, class: 'control-label'
+    .controls
+      = f.text_field :address, class: 'form-control'

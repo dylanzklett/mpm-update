@@ -1,0 +1,37 @@
+- model_class = Curtain
+%table.table.table-striped.curtains
+  %thead
+    %tr
+      %th= model_class.human_attribute_name(:building_number)
+      %th= model_class.human_attribute_name(:room)
+      %th= model_class.human_attribute_name(:width)
+      %th= model_class.human_attribute_name(:height)
+      %th= model_class.human_attribute_name(:inside)
+      %th= model_class.human_attribute_name(:wall_type)
+      %th= model_class.human_attribute_name(:fabric_color)
+      %th= model_class.human_attribute_name(:trough_color)
+      %th= model_class.human_attribute_name(:center_support)
+      %th= model_class.human_attribute_name(:end_bracket)
+      %th= model_class.human_attribute_name(:quantity)
+      %th Calculated Price
+      %th Proposed Price
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - curtains.each do |curtain|
+      %tr
+        %td= curtain.building_number
+        %td= curtain.room
+        %td= "#{curtain.width_in('in')} in | #{curtain.width_in('cm')} cm"
+        %td= "#{curtain.height_in('in')} in | #{curtain.height_in('cm')} cm"
+        %td= curtain.inout
+        %td= curtain.wall_type
+        %td= curtain.fabric_color
+        %td= curtain.trough_color
+        %td= curtain.center_support
+        %td= curtain.end_bracket
+        %td= curtain.quantity
+        %td= number_to_currency(curtain.full_price, unit: '$')
+        %td= number_to_currency(curtain.price, unit: '$')
+        %td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_curtain_path(curtain), :class => 'btn btn-default btn-xs'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), curtain_path(curtain), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'

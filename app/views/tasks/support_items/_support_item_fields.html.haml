@@ -1,0 +1,5 @@
+%tr.fields
+  %td= f.text_field :name, placeholder: 'Name'
+  %td= f.text_field :unit, placeholder: 'Unit'
+  %td= f.text_field :quantity, placeholder: 'Qty'
+  %td= link_to_remove_fields('remove', f, 'App.Methods.Items.remove_fields')

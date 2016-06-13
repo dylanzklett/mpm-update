@@ -1,0 +1,10 @@
+- if project.step_back.present?
+  .inline
+    = form_for project, url: project_state_path(project), method: :patch do |f|
+      = f.hidden_field :event, value: project.step_back
+      = f.submit "Make #{project.step_back}", class: 'btn btn-primary inline-block', data: { confirm: "Are you sure?" }
+- if project.step_forward.present?
+  .inline
+    = form_for project, url: project_state_path(project), method: :patch do |f|
+      = f.hidden_field :event, value: project.step_forward
+      = f.submit "Make #{project.step_forward}", class: 'btn btn-primary inline-block'

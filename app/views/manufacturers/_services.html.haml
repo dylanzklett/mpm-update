@@ -1,0 +1,20 @@
+- model_class = Service
+%h1
+  =t '.title', :default => model_class.model_name.human.pluralize.titleize
+  = link_to  'Add service', new_manufacturer_service_path(manufacturer), :class => 'btn btn-default'
+%table.table.table-striped.services
+  %thead
+    %tr
+      %th= model_class.human_attribute_name(:id)
+      %th= model_class.human_attribute_name(:name)
+      %th= model_class.human_attribute_name(:price)
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - services.each do |service|
+      %tr
+        %td= service.id
+        %td= service.name
+        %td= number_to_currency(service.price, unit: '$')
+        %td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_manufacturer_service_path(service.manufacturer, service), :class => 'btn btn-default btn-xs'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), manufacturer_service_path(service.manufacturer, service), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'

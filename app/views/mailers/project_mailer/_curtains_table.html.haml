@@ -1,0 +1,64 @@
+%table.curtains{border: 0, cellpadding: 0, cellspacing: 0, width: "100%", align: :center, contenteditable: 'false'}
+  %thead
+    %tr
+      %th{width: 35} Line #
+      %th Room No.
+      %th Curtain Color
+      %th Trough Color
+      %th W
+      %th L
+      %th Quantity
+      %th Item Price
+      %th Extended Price
+  %body
+    - project.curtains.each_with_index do |curtain, index|
+      %tr
+        %td= index+1
+        %td.centered= curtain.room
+        %td.centered= curtain.fabric_color
+        %td.centered= curtain.trough_color
+        %td.centered= "#{curtain.width_in('in')} in"
+        %td.centered= "#{curtain.height_in('in')} in"
+        %td.centered= curtain.quantity
+        %td.right-sided= number_to_currency(curtain.price, unit: '$')
+        %td.right-sided= number_to_currency(curtain.full_price, unit: '$')
+    %tr
+      %td
+        = project.curtains.size + 1
+      %td{colspan: 7}
+        %strong Sub-total for Safetydrape Product
+      %td.right-sided
+        %strong= number_to_currency(project.curtains_price, unit: '$')
+    - if project.discount.to_f > 0
+      %tr
+        %td
+          = project.curtains.size + 2
+        %td{colspan: 5}
+          %strong Discount on Product
+        %td.centered
+          = project.discount
+          \%
+        %td.right-sided= number_to_currency(project.curtains_discount, unit: '$')
+        %td.right-sided
+          %strong= number_to_currency(project.curtains_discounted, unit: '$')
+    %tr
+      %td
+        = project.discount.to_f > 0 ? project.curtains.size + 3 : project.curtains.size + 2
+      %td{colspan: 8}
+        %strong Support Items
+    %tr
+      %td
+        = project.discount.to_f > 0 ? project.curtains.size + 4 : project.curtains.size + 3
+      %td{colspan: 5, align: :center}
+      %td.centered
+        %strong U of M
+      %td.centered
+        %strong Unit Cost
+      %td &nbsp;
+    = render 'items_table_rows', project: project, start_index: (project.discount.to_f > 0 ? project.curtains.size + 5 : project.curtains.size + 4)
+    %tr
+      %td= project.curtains.size + project.items.size + (project.discount.to_f > 0 ? 7 : 6)
+      %td{ colspan: 7}
+        %strong Project Total
+      %td.right-sided
+        %strong= number_to_currency(project.price, unit: '$')

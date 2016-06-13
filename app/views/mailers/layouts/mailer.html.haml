@@ -1,0 +1,67 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %title MPM EMAIL
+    :css
+      body {
+        font-family: 'Cambria';
+        font-size: 16px !important;
+      }
+      .time-new-font {
+        font-family: 'Times New Roman';
+        font-size: 12px !important;
+      }
+      table {
+        width: 100%;
+        max-width: 800px;
+        border-collapse: collapse;
+      }
+      table tr td.email-body { min-height: 600px; }
+      table th { text-align: center; }
+      table.items-table tr th.number-column { width: 20px; }
+      table.items-table tr th,
+      table.items-table tr td,
+      table.worksheet_inventory_summary tr th,
+      table.worksheet_inventory_summary tr td { border: 1px solid #000; }
+      table.curtains tr:nth-child(even) { background-color: #d0d0d0; }
+      table.curtains tr:nth-child(odd) { background-color: #fff; }
+      table.curtains {
+        table-layout: fixed;
+      }
+      table.curtains tr {
+        height: 15px;
+        line-height: 15px
+      }
+      table.curtains tr th {
+        background-color: #6d6d6d;
+        color: #b1b1b1;
+      }
+      table.curtains tr th,
+      table.curtains tr td {
+        border: 1px solid #000;
+        padding: 5px;
+      }
+      table.curtains tr td.centered {
+        text-align: center;
+      }
+      table.curtains tr td.right-sided {
+        text-align: right;
+      }
+      div.brand-text {
+        font-size: 10px;
+        font-weight: bold;
+        font-style: italic;
+        font-family: 'Myriad Pro';
+      }
+      div.contacts{
+        font-size: 10px;
+        color: #c20000;
+      }
+      div.page-break { page-break-before: always; }
+      .red { color: #c20000; }
+      table.worksheet_summary { margin-top: 20px; }
+      table.worksheet_summary.drape { text-align: center; }
+      .print-footer { text-align:center; font-size:11pt; }
+  %body
+    = yield

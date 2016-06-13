@@ -1,0 +1,63 @@
+- model_class = User
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.titleize
+
+= link_to t('.back', :default => t("helpers.links.back")), users_path, :class => 'btn btn-default'
+= link_to t('.edit', :default => t("helpers.links.edit")), edit_user_path(user), :class => 'btn btn-default'
+= link_to t('.destroy', :default => t("helpers.links.destroy")), user_path(user), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+
+
+%div
+  %strong= model_class.human_attribute_name(:email) + ':'
+  = user.email
+%div
+  %strong= model_class.human_attribute_name(:rep_number) + ':'
+  = user.rep_number
+%div
+  %strong= model_class.human_attribute_name(:current_sign_in_at) + ':'
+  = l(user.current_sign_in_at, format: :date_time) if user.current_sign_in_at
+%div
+  %strong= model_class.human_attribute_name(:last_sign_in_at) + ':'
+  = l(user.last_sign_in_at, format: :date_time) if user.last_sign_in_at
+%div
+  %strong First name
+  = user.first_name
+%div
+  %strong Last name
+  = user.last_name
+%div
+  %strong Title
+  = user.first_title
+%div
+  %strong Company name
+  = user.second_title
+%div
+  %strong Address/Base/Location
+  = user.first_address
+%div
+  %strong Street Address
+  = user.second_address
+%div
+  %strong Country
+  = user.country
+%div
+  %strong City
+  = user.city
+%div
+  %strong State
+  = user.state
+%div
+  %strong Zip
+  = user.zip
+%div
+  %strong Office Phone
+  = user.phone_o
+%div
+  %strong Cell Phone
+  = user.phone_c
+%div
+  %strong= model_class.human_attribute_name(:admin) + ':'
+  = user.admin
+
+%h3 Recent projects
+= render 'projects/project_table', projects: user.projects

@@ -1,0 +1,5 @@
+- if obj.errors.full_messages.any?
+  .has-error
+    - obj.errors.full_messages.each do |error_message|
+      %span.help-block= error_message
+      %br/

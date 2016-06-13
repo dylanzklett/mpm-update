@@ -1,0 +1,29 @@
+%h1
+  Inventory
+  = link_to  'Add Item', new_manufacturer_inventory_item_path(manufacturer), :class => 'btn btn-default'
+%table.table.table-striped.inventory-items
+  %thead
+    %tr
+      %th name
+      %th{style: 'width: 45%;'}
+        description
+      %th unit of measurement
+      %th additions
+      %th deletions
+      %th balance
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - items.each do |item|
+      %tr
+        %td= item.name
+        %td= item.description
+        %td= item.unit
+        %td= item.additions
+        %td= item.deletions
+        %td= item.balance
+        %td
+          = link_to 'History', inventory_item_inventory_history_items_path(item), :class => 'btn btn-default btn-xs'
+          = link_to 'Edit', edit_manufacturer_inventory_item_path(item.manufacturer, item), :class => 'btn btn-default btn-xs'
+          = link_to 'Add items', new_inventory_item_inventory_history_item_path(item, event: :addition), :class => 'btn btn-default btn-warning btn-xs'
+          = link_to 'Deduct items', new_inventory_item_inventory_history_item_path(item, event: :deletion), :class => 'btn btn-default btn-warning btn-xs'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), manufacturer_inventory_item_path(item.manufacturer, item), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'

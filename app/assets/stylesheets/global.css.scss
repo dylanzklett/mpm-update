@@ -1,0 +1,52 @@
+html {
+  body {
+    th{
+      a{
+        &.asc, &.desc{
+          color: #000;
+        }
+      }
+      .asc:after {
+        padding-left: 10px;
+        content:          '▲';
+      }
+      .desc:after {
+        padding-left: 10px;
+        content:          '▼';
+      }
+    }
+
+    .inline {
+      display: inline-block;
+    }
+
+    div.fields {
+      .field_with_errors {
+        @extend .inline;
+      }
+    }
+
+    .price-matrix, .trough-matrix {
+      .price-matrix-cell, .trough-matrix-cell {
+        width: 90px;
+        display: inline-block;
+        vertical-align: top;
+      }
+    }
+    table.manage-task-items{
+      tr th{
+        text-align:center;
+        border: 1px solid #ccc;
+      }
+      tr td:last-child{
+        border: 1px solid #ccc;
+      }
+    }
+  }
+}
+
+@media print{
+  .actions {
+    display: none;
+  }
+}

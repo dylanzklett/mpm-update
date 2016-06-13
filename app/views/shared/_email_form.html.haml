@@ -1,0 +1,24 @@
+= form_for :email, url: form_url, method: :post do |f|
+  %div.actions
+    = f.submit 'Send Email', class: 'btn btn-warning', :data => { :confirm => 'Are you sure you want to send this email?' }
+    = link_to 'Cancel', cancel_url, class: 'btn btn-default'
+  %br
+  .form-group
+    = f.label 'from', 'From:', class: 'control-label'
+    .controls
+      = f.text_field 'from', value: email_params[:from], class: 'form-control', autocomplete: :off
+  .form-group
+    = f.label 'to', 'To:', class: 'control-label'
+    .controls
+      = f.text_field 'to', value: email_params[:to], class: 'form-control', autocomplete: :off
+  .form-group
+    = f.label 'cc', 'CC:', class: 'control-label'
+    .controls
+      = f.text_field 'cc', value: email_params[:cc], class: 'form-control', autocomplete: :off
+  .form-group
+    = f.label 'subject', 'Subject:', class: 'control-label'
+    .controls
+      = f.text_field 'subject', value: email_params[:subject], class: 'form-control', autocomplete: :off
+  %br
+  %div
+    = f.cktext_area :content, value: email_params[:content]

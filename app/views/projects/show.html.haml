@@ -1,0 +1,92 @@
+.page-header
+  %h1
+    Project
+    = project.versioned_name
+    - if project.versions.any?
+      = link_to "(#{pluralize(project.versions.size, 'version')})", project_versions_path(project), style: 'font-size:14px;'
+
+.actions
+  = link_to t('.back', :default => t("helpers.links.back")), projects_path, :class => 'btn btn-default'
+  - if project.editable?
+    = link_to t('.edit', :default => t("helpers.links.edit")), edit_project_path(project), :class => 'btn btn-default'
+  = link_to t('.destroy', :default => t("helpers.links.destroy")), project_path(project), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+%br
+%div.possible_actions
+  = project.possible_actions
+%div
+  %strong Customer:
+  = link_to project.customer_email, customer_path(project.customer) if project.customer_email
+- if project.customer_number.present?
+  %div
+    %strong Customer number:
+    = project.customer_number
+%div
+  %strong Sales:
+  = project.sales_email
+  = "(#{project.sales_rep_number})" if project.sales_rep_number.present?
+- if project.sales_number.present?
+  %div
+    %strong Sales number:
+    = project.sales_number
+%div.state
+  %strong Status:
+  = project.state
+%div
+  %strong Product Subtotal:
+  = number_to_currency(project.curtains_price, unit: '$')
+- if project.discount.present?
+  %div
+    %strong Discount on Product:
+    = project.discount
+    \%
+%div:
+  %strong Support Items Subtotal:
+  = number_to_currency(project.items_price, unit: '$')
+%div
+  %strong Proposal Project Total:
+  = number_to_currency(project.price, unit: '$')
+
+= render 'curtains', project: project unless project.new_record?
+
+%div
+  %h3 Support items
+  %table.table.table-striped.support-items
+    %tr
+      %th Name:
+      %th Unit
+      %th Quantity:
+      %th Item Price:
+      %th Extended Price:
+      %th Actions
+    - if project.items.auto_created.any?
+      %tr
+        %td{colspan: 6, align: :center}
+          %strong Auto populated support items
+      = render project.items.auto_created
+    - if project.items.non_auto_created.any?
+      %tr
+        %td{colspan: 6, align: :center}
+          %strong Manual support items
+      = render project.items.non_auto_created
+    - if project.items.any?
+      %tr
+        %th{colspan: 3}
+        %th Sub Total
+        %th= number_to_currency(project.items_price, unit: '$')
+        %th &nbsp;
+
+- if project.tasks.any?
+  %div
+    %h3 Related tasks
+    %table.table.table-striped.related-tasks
+      %thead
+        %tr
+          %th Manufacturer
+          %th Type
+          %th Project
+          %th Purchase Order
+          %th Date wanted
+          %th Order Date
+          %th Status
+          %th=t '.actions', :default => t("helpers.actions")
+      = render 'tasks/tasks_table', tasks: project.tasks

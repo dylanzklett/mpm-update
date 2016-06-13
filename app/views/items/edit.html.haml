@@ -1,0 +1,21 @@
+= form_for [project, item], html: { class: "form form-horizontal item" } do |f|
+  = f.submit nil,class: 'btn btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), (project.new_record? ? projects_path : project_path(project)), :class => 'btn btn-default'
+
+  = render 'shared/form_errors', obj: item
+  .form-group
+    = f.label :name
+    .controls
+      = f.text_field :name
+  .form-group
+    = f.label :unit
+    .controls
+      = f.text_field :unit
+  .form-group
+    = f.label :quantity
+    .controls
+      = f.text_field :quantity
+  .form-group
+    = f.label :price
+    .controls
+      = f.text_field :price

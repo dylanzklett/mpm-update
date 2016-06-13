@@ -1,0 +1,21 @@
+= render 'tasks/task_info', task: task
+
+= form_for task do |f|
+  .actions
+    = f.submit 'Update Support items List', class: 'btn btn-primary', :data => { :confirm => 'Are you sure you want to change the auto generated values? If the task is updated your changes will be lost.' }
+    = link_to 'Back', url_for([task.project, task]), :class => 'btn btn-default'
+    %br
+    %br
+  = f.hidden_field :support_update, value: true
+  %table.table.table-bordered.manage-support-items
+    %tr
+      %td
+        %strong Name:
+      %td
+        %strong Unit:
+      %td
+        %strong Qty:
+    = f.fields_for :support_items do |task_item_f|
+      = render "support_item_fields", f: task_item_f
+    %tr
+      %td= link_to_add_fields "Add Item", f, :support_items, 'App.Methods.TaskItems.add_fields'

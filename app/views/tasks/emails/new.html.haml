@@ -1,0 +1,7 @@
+= render 'shared/email_form', form_url: task_email_path(task),           |
+                              cancel_url: url_for([task.project, task]), |
+                              email_params: {                            |
+                                to:      task.manufacturer_email,        |
+                                content: content,                        |
+                                subject: 'Worksheet from MitiTech'       |
+                              }                                          |

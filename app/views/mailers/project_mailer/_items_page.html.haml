@@ -1,0 +1,23 @@
+%table{align: :center}
+  %tr
+    %td{colspan: 3, style: 'text-align: center;'}
+      %br
+      %span.red
+        %strong
+          PROPOSAL NO.
+          = @project.versioned_name
+= render 'curtains_table', project: @project
+%table{align: :center}
+  %tr
+    %td
+      %br
+      .red NOTES
+      All pricing shown in USD.
+%br
+%table{align: :center}
+  %tr
+    %td
+      .red PAYMENT TERMS
+      %span{style: 'background-color: #FFFF00;'}
+        Deposit and 50% balance before delivery. Terms are Net invoice without retainage. Sales, use, excise, federal, state, or local taxes are not included.
+      US Federal & Local Governments are entitled to Net 30 day terms.

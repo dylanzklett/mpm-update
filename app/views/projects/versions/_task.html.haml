@@ -1,0 +1,7 @@
+%tr
+  %td= task.manufacturer_title if task.manufacturer
+  %td= task.manufacturer.get_type if task.manufacturer
+  %td= "##{task.project_id}"
+  %td= l(task.date_wanted, format: :short) if task.date_wanted
+  %td= l(task.mitech_rec_date, format: :short) if task.mitech_rec_date
+  %td= task.status

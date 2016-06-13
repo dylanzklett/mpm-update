@@ -1,0 +1,14 @@
+%tr
+  %td= curtain['building_number']
+  %td= curtain['room']
+  %td= UnitConverter.converting(curtain['width'], 'mm', 'in')
+  %td= UnitConverter.converting(curtain['height'], 'mm', 'in')
+  %td= curtain['inout']
+  %td= curtain['wall_type']
+  %td= curtain['fabric_color']
+  %td= curtain['trough_color']
+  %td= curtain['center_support']
+  %td= curtain['end_bracket']
+  %td= curtain['quantity']
+  %td= number_to_currency(curtain['price'], unit: '$')
+  %td= number_to_currency(curtain['price'].to_f * curtain['quantity'], unit: '$')
