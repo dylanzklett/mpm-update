@@ -1,6 +1,6 @@
 set :rails_env, 'production'
 set :stage, :production
-set :branch, 'r1'
+set :branch, 'master'
 
 set :host, '104.131.68.111'
 set :user, 'deploy'
