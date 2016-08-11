@@ -1,8 +1,8 @@
 class DrapeLabelGenerator < LabelGenerator
   def print_curtain_info(task_item)
     res = ''
-    res += "Customer Order No.  #{task.project.customer_number}\n"
-    res += "Sales Order No. #{task.project.sales_number}\n"
+    res += "PO#  #{task.project.customer_number}\n"
+    res += "SO# #{task.project.sales_number}\n"
     res += "Color: #{task_item.pattern_color}\n"
     res += "Width: #{task_item.convert(:width, 'in')}in | #{task_item.convert(:width, 'cm')}cm\n"
     res += "Length:  #{task_item.convert(:height, 'in')}in | #{task_item.convert(:height, 'cm')}cm\n"
