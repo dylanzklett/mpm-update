@@ -13,6 +13,14 @@
     / Added Project Proposal Number
     Proposal Number:
     = project.proposal_number
+  %h4
+    / Added Project Date Created
+    Created:
+    = project.created_at.strftime("%A %B %d %Y")
+  %h4
+    / Added Project Last Updated At
+    Last Updated At:
+    = project.updated_at.strftime("%A %B %d %Y")
 
 .actions
   = link_to t('.back', :default => t("helpers.links.back")), projects_path, :class => 'btn btn-default'

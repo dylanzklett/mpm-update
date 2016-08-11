@@ -30,7 +30,7 @@
   .form-group
     = f.label :wall_type, class: 'control-label'
     .controls
-      = f.text_field :wall_type, class: 'form-control'
+      = f.select :wall_type, options_for_select(['Concrete','Steel', 'Block', 'Wood', 'Sheetrock', 'Other 16OC', 'Other 20OC']), {}, {class: 'form-control'}
   .form-group
     = f.label :fabric_color, class: 'control-label'
     .controls

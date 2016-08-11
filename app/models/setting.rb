@@ -93,7 +93,7 @@ class Setting < ActiveRecord::Base
   private
 
   def self.get_array_vals(code)
-    find_by_code(code).value.split(',').map(&:strip)
+    find_by_code(code).value.split(',').map(&:strip) unless find_by_code(code).nil?
   end
 
   def self.get_val(code)

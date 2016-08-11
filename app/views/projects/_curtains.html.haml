@@ -23,7 +23,20 @@
     %body
       = render project.curtains
       %tr
-        %th{colspan: 11}
+        %th{colspan: 8}
+          %th Center Support Sub Total
+          / Adding Curtain Center Support Subtotal
+
+          / %th= Curtain.where(project_id: params[:id]).center_support
+
+          / Add curtain center support subtotal ends
+
+          / Adding Curtain Center Quantity Subtotal
+
+          / %th= Curtain.where(project_id: params[:id]).center_support
+          
+          / Add curtain center support Quantity ends
+        %th{colspan: 1}
         %th Sub total
         %th= number_to_currency(project.curtains_price, unit: '$')
         %th &nbsp;
